@@ -1,0 +1,145 @@
+{
+  "skills": [
+    {
+      "name": "Java",
+      "level": 85,
+      "category": "languages"
+    },
+    {
+      "name": "C++",
+      "level": 80,
+      "category": "languages"
+    },
+    {
+      "name": "Python",
+      "level": 75,
+      "category": "languages"
+    },
+    {
+      "name": "React",
+      "level": 85,
+      "category": "web"
+    },
+    {
+      "name": "Node.js",
+      "level": 80,
+      "category": "web"
+    },
+    {
+      "name": "MongoDB",
+      "level": 75,
+      "category": "web"
+    },
+    {
+      "name": "AWS EC2",
+      "level": 85,
+      "category": "cloud"
+    },
+    {
+      "name": "AWS S3",
+      "level": 85,
+      "category": "cloud"
+    },
+    {
+      "name": "AWS Lambda",
+      "level": 80,
+      "category": "cloud"
+    },
+    {
+      "name": "Apache CloudStack",
+      "level": 70,
+      "category": "cloud"
+    },
+    {
+      "name": "Linux (Ubuntu/Arch/Debian)",
+      "level": 80,
+      "category": "os"
+    },
+    {
+      "name": "Git & GitHub",
+      "level": 85,
+      "category": "tools"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Bus Reservation & Booking System",
+      "description": "Designed an interactive UI for booking and managing bus seats with real-time scheduling. Integrated REST APIs for booking validation and seat management, providing a seamless user experience.",
+      "technologies": ["React", "C++", "REST API"],
+      "categories": ["react", "fullstack"],
+      "github": "https://github.com/nishantdeploys",
+      "live": ""
+    },
+    {
+      "title": "Social Media Post Scheduler",
+      "description": "Developed a chatbot-like interface to create and schedule posts across multiple platforms including Instagram, Facebook, and LinkedIn. Implemented CRUD features with an integrated date/time picker for automated posting.",
+      "technologies": ["React", "Node.js", "MongoDB"],
+      "categories": ["react", "fullstack"],
+      "github": "https://github.com/nishantdeploys",
+      "live": ""
+    },
+    {
+      "title": "Secure File Upload & Processing System",
+      "description": "Built a secure file handling system using AWS services within the AWS Academy sandbox. Automated file event processing using S3 triggers and Lambda functions for real-time logging and monitoring.",
+      "technologies": ["AWS EC2", "AWS S3", "AWS Lambda", "Python"],
+      "categories": ["aws", "fullstack"],
+      "github": "https://github.com/nishantdeploys",
+      "live": ""
+    }
+  ],
+  "experience": [
+    {
+      "title": "Summer Training in DSA + C++",
+      "company": "Self-Paced Learning",
+      "period": "Summer 2024",
+      "description": "Completed intensive training in Data Structures and Algorithms using C++. Focused on problem-solving techniques, algorithm optimization, and competitive programming concepts.",
+      "technologies": ["C++", "DSA", "Problem Solving"]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Technology - Computer Science & Engineering",
+      "institution": "Lovely Professional University, Punjab",
+      "period": "2022 - 2026",
+      "description": "Pursuing B.Tech in Computer Science & Engineering with focus on Cloud Computing, Full-Stack Development, and Software Engineering."
+    },
+    {
+      "degree": "Intermediate (12th)",
+      "institution": "SRPN High School, Sitamarhi, Bihar",
+      "period": "2020 - 2022",
+      "description": "Completed higher secondary education with excellent academic performance."
+    },
+    {
+      "degree": "Matric (10th)",
+      "institution": "SRPN High School, Sitamarhi, Bihar",
+      "period": "2019 - 2020",
+      "description": "Completed secondary education with distinction."
+    }
+  ],
+  "achievements": [
+    {
+      "title": "GFG's 160 Days of Code Challenge",
+      "description": "Successfully completed GeeksforGeeks' 160 Days of Code Challenge, demonstrating consistent problem-solving skills and dedication to continuous learning.",
+      "icon": "🏆",
+      "date": "2024"
+    },
+    {
+      "title": "Oracle Cloud Infrastructure (OCI) Multicloud Architect Professional",
+      "description": "Earned professional certification in Oracle Cloud Infrastructure, demonstrating expertise in multicloud architecture and enterprise cloud solutions.",
+      "icon": "☁️",
+      "date": "2024"
+    },
+    {
+      "title": "Oracle Cloud Infrastructure (OCI) Foundation Associate",
+      "description": "Achieved foundational certification in Oracle Cloud Infrastructure, validating core cloud computing concepts and OCI service knowledge.",
+      "icon": "🎓",
+      "date": "2024"
+    }
+  ],
+  "contact": {
+    "email": "nishant098097@gmail.com",
+    "phone": "+917480985252",
+    "github": "https://github.com/nishantdeploys",
+    "linkedin": "https://linkedin.com/in/nishant-kumar-61476b283"
+  }
+}
