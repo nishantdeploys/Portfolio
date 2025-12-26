@@ -25,6 +25,42 @@ body {
     background-color: var(--bg-primary);
     overflow-x: hidden;
     transition: background-color var(--transition-base), color var(--transition-base);
+    position: relative;
+}
+
+/* Dynamic moving gradient background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        #FF6B6B 0%, 
+        #C44569 25%, 
+        #6C5CE7 50%, 
+        #5541D7 75%, 
+        #00D9A5 100%
+    );
+    background-size: 400% 400%;
+    opacity: 0.15;
+    z-index: -1;
+    pointer-events: none;
+    animation: gradientFlow 15s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 /* ===== TYPOGRAPHY ===== */
@@ -100,9 +136,19 @@ a:hover {
 }
 
 .logo {
-    font-size: var(--fs-2xl);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-size: var(--fs-lg);
     font-weight: var(--fw-bold);
-    font-family: var(--font-mono);
+}
+
+.logo svg {
+    transition: transform var(--transition-base);
+}
+
+.logo:hover svg {
+    transform: rotate(15deg) scale(1.1);
 }
 
 .logo-text {
@@ -213,20 +259,37 @@ a:hover {
 /* ===== HERO SECTION ===== */
 .hero {
     position: relative;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 80px;
+    justify-content: center;
     overflow: hidden;
+    padding-top: 80px;
 }
 
 .hero-container {
     position: relative;
-    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .hero-content {
-    max-width: 800px;
+    width: 90vw;
+    height: 85vh;
+    max-width: none;
+    padding: var(--space-3xl);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-backdrop);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-2xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .hero-title {
@@ -339,7 +402,7 @@ a:hover {
 
 /* ===== FLOATING SHAPES ===== */
 .floating-shapes {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
