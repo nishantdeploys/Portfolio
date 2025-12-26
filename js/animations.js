@@ -36,7 +36,6 @@ class AnimationManager {
         const elementsToObserve = document.querySelectorAll(`
             .section,
             .skill-card,
-            .project-card,
             .timeline-item,
             .achievement-card,
             .about-content,
@@ -47,6 +46,9 @@ class AnimationManager {
             element.classList.add('reveal');
             this.observer.observe(element);
         });
+
+        // Don't auto-observe project cards as they're dynamically loaded
+        // They will be observed by the ProjectCards component
     }
 
     /**
