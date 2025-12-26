@@ -29,7 +29,7 @@ class SkillBars {
         if (!this.container) return;
 
         this.container.innerHTML = this.skills.map(skill => `
-            <div class="skill-card reveal">
+            <div class="skill-card">
                 <div class="skill-header">
                     <span class="skill-name">${skill.name}</span>
                     <span class="skill-level">${skill.level}%</span>

@@ -38,7 +38,7 @@ class ProjectCards {
             );
 
         this.container.innerHTML = filteredProjects.map(project => `
-            <div class="project-card reveal" data-categories="${project.categories.join(',')}">
+            <div class="project-card" data-categories="${project.categories.join(',')}">
                 <h3 class="project-title">${project.title}</h3>
                 <p class="project-description">${project.description}</p>
                 <div class="project-tech">
