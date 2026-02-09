@@ -54,8 +54,8 @@ Portfolio Website/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/nishantdeploys/portfolio-website.git
-   cd portfolio-website
+   git clone https://github.com/nishantdeploys/Portfolio.git
+   cd Portfolio
    ```
 
 2. **Open in browser**
@@ -95,7 +95,7 @@ Deploy easily to:
 - **Email**: nishant098097@gmail.com
 - **Phone**: +91 7480985252
 - **GitHub**: [@nishantdeploys](https://github.com/nishantdeploys)
-- **LinkedIn**: [Nishant Kumar](https://linkedin.com/in/nishant-kumar-61476b283)
+- **LinkedIn**: [Nishant Kumar](https://www.linkedin.com/in/nishxnt/)
 
 ## 📄 License
 
