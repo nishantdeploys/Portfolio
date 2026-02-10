@@ -100,6 +100,22 @@ async function loadAchievements() {
                 <p class="achievement-description">${achievement.description}</p>
             </div>
         `).join('');
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }
+        );
+
+        container.querySelectorAll('.achievement-card').forEach(card => {
+            observer.observe(card);
+        });
     } catch (error) {
         console.error('Error loading achievements:', error);
     }
@@ -110,30 +126,133 @@ async function loadAchievements() {
  */
 function initContactForm() {
     const form = document.getElementById('contactForm');
+    const formAction = 'https://docs.google.com/forms/u/0/d/e/1FAIpQLScDIPqrubh3bVKTUc-AIPBKIdYnynZYi_nhi1ERtFDbzbvd6Q/formResponse';
+    const submitButton = form ? form.querySelector('.submit-btn') : null;
 
     if (!form) return;
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        if (submitButton?.classList.contains('is-loading')) {
+            return;
+        }
+
+        setSubmitLoadingState(submitButton, true);
+
         // Get form data
         const formData = {
             name: document.getElementById('name').value,
             email: document.getElementById('email').value,
+            institute: document.getElementById('institute').value,
             subject: document.getElementById('subject').value,
-            message: document.getElementById('message').value
+            rating: document.querySelector('input[name="rating"]:checked')?.value || ''
         };
 
         // Validate form
         if (!validateForm(formData)) {
+            setSubmitLoadingState(submitButton, false);
             return;
         }
 
-        // In a real application, you would send this data to a server
-        // For now, we'll just show a success message
-        showFormMessage('success', 'Thank you for your message! I\'ll get back to you soon.');
-        form.reset();
+        submitToGoogleForm(
+            formAction,
+            {
+                'entry.436790427': formData.name,
+                'entry.1826983457': formData.email,
+                'entry.1398257962': formData.institute,
+                'entry.2023186783': formData.subject,
+                'entry.1185156895': formData.rating
+            },
+            () => {
+                showFormMessage('success', 'Thanks for your response!');
+                form.reset();
+                setSubmitLoadingState(submitButton, false);
+            },
+            (error) => {
+                console.error('Error submitting form:', error);
+                showFormMessage('error', 'Sorry, something went wrong. Please try again.');
+                setSubmitLoadingState(submitButton, false);
+            }
+        );
     });
+}
+
+function setSubmitLoadingState(button, isLoading) {
+    if (!button) return;
+
+    button.classList.toggle('is-loading', isLoading);
+    button.disabled = isLoading;
+}
+
+function submitToGoogleForm(actionUrl, fields, onSuccess, onError) {
+    const iframeName = 'google-form-target';
+    const iframe = document.createElement('iframe');
+    iframe.name = iframeName;
+    iframe.style.display = 'none';
+
+    const form = document.createElement('form');
+    form.action = actionUrl;
+    form.method = 'POST';
+    form.target = iframeName;
+
+    Object.entries(fields).forEach(([key, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = value;
+        form.appendChild(input);
+    });
+
+    const fvv = document.createElement('input');
+    fvv.type = 'hidden';
+    fvv.name = 'fvv';
+    fvv.value = '1';
+    form.appendChild(fvv);
+
+    const pageHistory = document.createElement('input');
+    pageHistory.type = 'hidden';
+    pageHistory.name = 'pageHistory';
+    pageHistory.value = '0';
+    form.appendChild(pageHistory);
+
+    const fbzx = document.createElement('input');
+    fbzx.type = 'hidden';
+    fbzx.name = 'fbzx';
+    fbzx.value = String(Date.now());
+    form.appendChild(fbzx);
+
+    let hasSubmitted = false;
+    const cleanup = () => {
+        iframe.removeEventListener('load', handleLoad);
+        if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
+        if (form.parentNode) form.parentNode.removeChild(form);
+    };
+
+    const handleLoad = () => {
+        if (!hasSubmitted) return;
+        cleanup();
+        onSuccess();
+    };
+
+    iframe.addEventListener('load', handleLoad);
+    document.body.appendChild(iframe);
+    document.body.appendChild(form);
+
+    try {
+        hasSubmitted = true;
+        form.submit();
+
+        setTimeout(() => {
+            if (hasSubmitted && iframe.isConnected) {
+                cleanup();
+                onSuccess();
+            }
+        }, 1500);
+    } catch (error) {
+        cleanup();
+        onError(error);
+    }
 }
 
 /**
@@ -161,9 +280,15 @@ function validateForm(data) {
         isValid = false;
     }
 
-    // Message validation
-    if (data.message.trim().length < 10) {
-        showFieldError('message', 'Please enter a message (at least 10 characters)');
+    // Institute validation
+    if (data.institute.trim().length < 2) {
+        showFieldError('institute', 'Please enter your institute/organization');
+        isValid = false;
+    }
+
+    // Rating validation
+    if (!data.rating) {
+        showFieldError('ratingOptions', 'Please select a rating');
         isValid = false;
     }
 
