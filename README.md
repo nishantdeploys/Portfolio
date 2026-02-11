@@ -73,6 +73,35 @@ Portfolio Website/
    npx serve
    ```
 
+## 🐳 Docker
+
+Build the image:
+```bash
+docker build -t portfolio:latest .
+```
+
+Run the container:
+```bash
+docker run --rm -p 8080:80 portfolio:latest
+```
+
+Open http://localhost:8080
+
+## ☸️ Kubernetes (Generic)
+
+Apply manifests:
+```bash
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+```
+
+Port-forward to access locally:
+```bash
+kubectl port-forward svc/portfolio 8080:80
+```
+
+Open http://localhost:8080
+
 ## 📝 Customization
 
 All content is centralized in `data/content.json`. Update this file to customize:
